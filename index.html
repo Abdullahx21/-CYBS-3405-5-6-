@@ -1,0 +1,745 @@
+
+<style>
+:root{
+  --color-background-primary:#161c30;
+  --color-background-secondary:#1f2640;
+  --color-background-tertiary:#2a3354;
+  --color-text-primary:#e8ecf5;
+  --color-text-secondary:#9aa3bf;
+  --color-border-secondary:rgba(255,255,255,.14);
+  --color-border-tertiary:rgba(255,255,255,.08);
+  --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans Arabic',Tahoma,Geneva,Verdana,sans-serif;
+  --border-radius-lg:14px;
+  --border-radius-md:10px;
+}
+html{background:#0d1220}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:#0d1220;color:var(--color-text-primary);line-height:1.6}
+.wrap{padding:1rem 0}
+.hdr{background:linear-gradient(135deg,#1a1f35,#0d1220);border-radius:var(--border-radius-lg);padding:1.5rem 1.2rem;text-align:center;margin-bottom:1rem}
+.hdr h1{font-size:1.4rem;font-weight:500;color:#93c5fd;margin-bottom:.3rem}
+.hdr p{color:#9ca3af;font-size:.85rem}
+.badge{display:inline-block;background:rgba(239,68,68,.2);border:1px solid rgba(239,68,68,.4);color:#fca5a5;border-radius:20px;padding:.25rem .8rem;font-size:.8rem;margin-top:.5rem}
+.nav{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
+.tb{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);padding:.38rem .75rem;border-radius:20px;cursor:pointer;font-size:.8rem;white-space:nowrap;transition:all .2s}
+.tb:hover{background:var(--color-background-primary);color:var(--color-text-primary)}
+.tb.on{background:#4f8ef7;border-color:#4f8ef7;color:#fff;font-weight:500}
+.pg{display:none}.pg.on{display:block}
+.st{font-size:1rem;font-weight:500;color:#4f8ef7;border-right:3px solid #4f8ef7;padding-right:.6rem;margin-bottom:1rem}
+.cc{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);margin-bottom:1rem;overflow:hidden}
+.ch{display:flex;align-items:center;gap:.5rem;padding:.85rem 1rem;background:var(--color-background-secondary);cursor:pointer}
+.ch:hover{background:var(--color-background-tertiary)}
+.cn{background:#4f8ef7;color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:500;flex-shrink:0}
+.ct{font-size:.9rem;font-weight:500;flex:1;color:var(--color-text-primary)}
+.ca{color:var(--color-text-secondary);font-size:.9rem;transition:transform .2s}
+.ca.op{transform:rotate(180deg)}
+.cb{padding:1rem;display:none}.cb.op{display:block}
+.en-blk{background:rgba(79,142,247,.06);border-right:3px solid #4f8ef7;border-radius:var(--border-radius-md);padding:.65rem .9rem;margin-bottom:.8rem;font-size:.83rem;color:#93c5fd;direction:ltr;text-align:left;line-height:1.8}
+.ar-blk{background:rgba(123,92,240,.07);border-right:3px solid #7b5cf0;border-radius:var(--border-radius-md);padding:.65rem .9rem;margin-bottom:.8rem;font-size:.85rem;color:var(--color-text-primary);line-height:1.85}
+.ex-blk{background:rgba(16,185,129,.07);border-right:3px solid #10b981;border-radius:var(--border-radius-md);padding:.65rem .9rem;margin-bottom:.8rem;font-size:.85rem;line-height:1.85;color:var(--color-text-primary)}
+.lbl{font-size:.68rem;font-weight:500;letter-spacing:.05em;margin-bottom:.3rem;opacity:.85}
+.en-blk .lbl{color:#4f8ef7}
+.ar-blk .lbl{color:#7b5cf0}
+.ex-blk .lbl{color:#10b981}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.7rem;margin-bottom:.7rem}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.7rem;margin-bottom:.7rem}
+.mc{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:.75rem .85rem}
+.mt{font-weight:500;font-size:.85rem;margin-bottom:.35rem;color:var(--color-text-primary)}
+.mb{font-size:.8rem;color:var(--color-text-secondary);line-height:1.75}
+.tr{display:block;font-size:.72rem;color:#10b981;font-weight:500;margin-top:.12rem}
+.trw{font-size:.72rem;color:#10b981;font-weight:500}
+.qs{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:.85rem;margin-top:.85rem}
+.qt{font-size:.78rem;font-weight:500;color:#f59e0b;margin-bottom:.75rem}
+.q{margin-bottom:.85rem;background:var(--color-background-primary);border-radius:var(--border-radius-md);overflow:hidden;border:0.5px solid var(--color-border-tertiary)}
+.qtx{padding:.65rem .85rem .45rem;font-size:.85rem;font-weight:500;color:var(--color-text-primary);border-right:3px solid #f59e0b}
+.qtp{display:inline-block;font-size:.67rem;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);color:#fbbf24;border-radius:3px;padding:.07rem .35rem;margin-right:.3rem;font-weight:500;vertical-align:middle}
+.opts{padding:.2rem .65rem .65rem;display:flex;flex-direction:column;gap:.28rem}
+.op{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);padding:.4rem .75rem;border-radius:var(--border-radius-md);cursor:pointer;font-size:.82rem;text-align:right;transition:all .2s}
+.op:hover:not(:disabled){background:var(--color-background-primary);color:var(--color-text-primary)}
+.op.ok{background:rgba(16,185,129,.15)!important;border-color:rgba(16,185,129,.4)!important;color:#6ee7b7!important;cursor:default}
+.op.ng{background:rgba(239,68,68,.15)!important;border-color:rgba(239,68,68,.4)!important;color:#fca5a5!important;cursor:default}
+.ep{padding:.45rem .85rem .65rem;font-size:.8rem;border-top:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);line-height:1.7;display:none}
+.ep.sh{display:block}
+.ek{color:#6ee7b7;font-weight:500;font-size:.78rem;display:block;margin-bottom:.18rem}
+.ew{color:#fca5a5;font-weight:500;font-size:.78rem;display:block;margin-bottom:.18rem}
+.tfr{display:flex;gap:.4rem;padding:.2rem .65rem .65rem}
+.tf{flex:1;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);padding:.4rem;border-radius:var(--border-radius-md);cursor:pointer;font-size:.82rem;transition:all .2s}
+.tf:hover:not(:disabled){background:var(--color-background-primary);color:var(--color-text-primary)}
+.tf.ok{background:rgba(16,185,129,.15)!important;border-color:rgba(16,185,129,.4)!important;color:#6ee7b7!important}
+.tf.ng{background:rgba(239,68,68,.15)!important;border-color:rgba(239,68,68,.4)!important;color:#fca5a5!important}
+.fw{padding:.2rem .65rem .65rem;display:flex;gap:.4rem;flex-wrap:wrap}
+.fi{background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);color:var(--color-text-primary);padding:.35rem .6rem;border-radius:var(--border-radius-md);font-size:.82rem;flex:1;min-width:120px}
+.fb{background:#4f8ef7;border:none;color:#fff;padding:.35rem .8rem;border-radius:var(--border-radius-md);cursor:pointer;font-size:.82rem;font-weight:500}
+.tl{position:relative;padding-right:1.7rem}
+.tl::before{content:'';position:absolute;right:.55rem;top:0;bottom:0;width:2px;background:var(--color-border-secondary)}
+.ts{position:relative;margin-bottom:.9rem}
+.ts::before{content:attr(data-n);position:absolute;right:-1.7rem;top:.06rem;width:1.2rem;height:1.2rem;background:#4f8ef7;color:#fff;border-radius:50%;font-size:.7rem;font-weight:500;display:flex;align-items:center;justify-content:center}
+.ts h4{font-size:.87rem;font-weight:500;color:var(--color-text-primary);margin-bottom:.22rem}
+.ts p{font-size:.8rem;color:var(--color-text-secondary);line-height:1.7}
+.scb{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:.8rem 1rem;margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.sn{font-size:1.5rem;font-weight:500;color:#f59e0b}
+.sl{color:var(--color-text-secondary);font-size:.83rem}
+.sr{margin-right:auto;background:transparent;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary);padding:.3rem .7rem;border-radius:var(--border-radius-md);cursor:pointer;font-size:.78rem}
+.pw{background:var(--color-background-tertiary);border-radius:999px;height:5px;flex:1;min-width:80px;overflow:hidden}
+.pb2{height:100%;background:linear-gradient(90deg,#4f8ef7,#7b5cf0);border-radius:999px;transition:width .4s}
+hr{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:1rem 0}
+.wn-blk{background:rgba(245,158,11,.07);border-right:3px solid #f59e0b;border-radius:var(--border-radius-md);padding:.65rem .9rem;margin-bottom:.8rem;font-size:.84rem;line-height:1.85;color:var(--color-text-primary)}
+.wn-blk .lbl{color:#f59e0b}
+</style>
+
+<div class="wrap" dir="rtl">
+
+<div class="hdr">
+  <h1>📚 CYBS 3405 — دليل المذاكرة الشامل</h1>
+  <p>المحاضرة 5: خصائص وتصنيف الثغرات | المحاضرة 6: استراتيجيات التخفيف</p>
+  <div class="badge">🎯 الاختبار: الخميس 11 يونيو 2026 — 10:30 ص — قاعة 0602</div>
+</div>
+
+<div class="nav">
+  <button class="tb on" onclick="sp('ov',this)">🗺️ نظرة عامة</button>
+  <button class="tb" onclick="sp('5a',this)">L5-أ: 7 طبقات</button>
+  <button class="tb" onclick="sp('pt',this)">L5-ب: اختبار الاختراق</button>
+  <button class="tb" onclick="sp('5c',this)">L5-ج: 15 خاصية</button>
+  <button class="tb" onclick="sp('5d',this)">L5-د: التصنيف</button>
+  <button class="tb" onclick="sp('6a',this)">L6-أ: التخفيف</button>
+  <button class="tb" onclick="sp('6b',this)">L6-ب: الدفاع المتعمق</button>
+  <button class="tb" onclick="sp('qz',this)">✅ أسئلة شاملة</button>
+</div>
+
+<!-- ===== نظرة عامة ===== -->
+<div class="pg on" id="pg-ov">
+<div class="st">⚡ جدول الحفظ السريع — كل الأرقام مع الترجمة</div>
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">!</span><span class="ct">افتح للحفظ السريع</span><span class="ca">▼</span></div>
+<div class="cb op"><div class="g2">
+
+<div class="mc" style="border-right:3px solid #4f8ef7">
+<div class="mt" style="color:#4f8ef7">7 طبقات الأمن (خارج ← داخل)</div>
+<div class="mb">
+1. Human Layer — <span class="trw">طبقة الإنسان</span><br>
+2. Perimeter Security — <span class="trw">أمن المحيط</span><br>
+3. Network Security — <span class="trw">أمن الشبكة</span><br>
+4. Endpoint Security — <span class="trw">أمن نقاط النهاية</span><br>
+5. Application Security — <span class="trw">أمن التطبيقات</span><br>
+6. Data Security — <span class="trw">أمن البيانات</span><br>
+7. Mission Critical Assets — <span class="trw">الأصول الحيوية</span>
+</div></div>
+
+<div class="mc" style="border-right:3px solid #06b6d4">
+<div class="mt" style="color:#06b6d4">8 خطوات Penetration Testing</div>
+<div class="mb">
+1. Planning & Preparation — <span class="trw">التخطيط والتحضير</span><br>
+2. Reconnaissance — <span class="trw">الاستطلاع</span><br>
+3. Scanning & Enumeration — <span class="trw">الفحص والتعداد</span><br>
+4. Vulnerability Assessment — <span class="trw">تقييم الثغرات</span><br>
+5. Exploitation — <span class="trw">الاستغلال</span><br>
+6. Post-Exploitation — <span class="trw">ما بعد الاستغلال</span><br>
+7. Reporting — <span class="trw">التقرير</span><br>
+8. Remediation & Follow-Up — <span class="trw">المعالجة والمتابعة</span>
+</div></div>
+
+<div class="mc" style="border-right:3px solid #f59e0b">
+<div class="mt" style="color:#f59e0b">15 خاصية للثغرات</div>
+<div class="mb">
+1. Exploitability — <span class="trw">قابلية الاستغلال</span><br>
+2. Impact — <span class="trw">الأثر</span><br>
+3. Scope — <span class="trw">النطاق</span><br>
+4. Attack Vector — <span class="trw">ناقل الهجوم</span><br>
+5. Complexity — <span class="trw">التعقيد</span><br>
+6. Privileges Required — <span class="trw">الصلاحيات المطلوبة</span><br>
+7. Detection Difficulty — <span class="trw">صعوبة الاكتشاف</span><br>
+8. Remediation Difficulty — <span class="trw">صعوبة المعالجة</span><br>
+9. Dependency — <span class="trw">الاعتمادية</span><br>
+10. Time Sensitivity — <span class="trw">الحساسية الزمنية</span><br>
+11. Persistence — <span class="trw">الاستمرارية</span><br>
+12. Environmental Factors — <span class="trw">العوامل البيئية</span><br>
+13. Public Awareness — <span class="trw">الوعي العام</span><br>
+14. Patch Availability — <span class="trw">توفر التصحيح</span><br>
+15. Attack Surface — <span class="trw">سطح الهجوم</span>
+</div></div>
+
+<div class="mc" style="border-right:3px solid #10b981">
+<div class="mt" style="color:#10b981">7 استراتيجيات التخفيف</div>
+<div class="mb">
+1. Patch Management — <span class="trw">إدارة التصحيحات</span><br>
+2. Security Configuration — <span class="trw">الإعداد الأمني</span><br>
+3. Access Control — <span class="trw">التحكم في الوصول</span><br>
+4. Network Security — <span class="trw">أمن الشبكة</span><br>
+5. Data Security — <span class="trw">أمن البيانات</span><br>
+6. Security Awareness Training — <span class="trw">التدريب على الوعي الأمني</span><br>
+7. Incident Response — <span class="trw">الاستجابة للحوادث</span>
+</div></div>
+
+<div class="mc" style="border-right:3px solid #ef4444">
+<div class="mt" style="color:#ef4444">6 مراحل Incident Response</div>
+<div class="mb">
+1. Preparation — <span class="trw">التحضير</span><br>
+2. Identification — <span class="trw">التحديد</span><br>
+3. Containment — <span class="trw">الاحتواء</span><br>
+4. Eradication — <span class="trw">الاستئصال</span><br>
+5. Recovery — <span class="trw">الاسترداد</span><br>
+6. Lessons Learned — <span class="trw">الدروس المستفادة</span>
+</div></div>
+
+<div class="mc" style="border-right:3px solid #7b5cf0">
+<div class="mt" style="color:#7b5cf0">3 أنظمة معيارية + 4 خطوات NIST</div>
+<div class="mb">
+CVE — <span class="trw">قاموس الثغرات المعروفة</span><br>
+CWE — <span class="trw">نظام تصنيف نقاط الضعف</span><br>
+CVSS — <span class="trw">نظام تسجيل درجة الخطورة</span><br><br>
+NIST: Plan (خطط) → Discover (اكتشف) → Attack (هاجم) → Report (أبلغ)
+</div></div>
+
+</div></div></div>
+</div>
+
+<!-- ===== L5-A ===== -->
+<div class="pg" id="pg-5a">
+<div class="st">🔒 الطبقات السبع للأمن السيبراني</div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">7</span><span class="ct">Human Layer — طبقة الإنسان (الأكثر خارجية)</span><span class="ca op">▼</span></div>
+<div class="cb op">
+<div class="en-blk"><div class="lbl">🇬🇧 النص الأصلي</div>Being aware of human threats like spamming, phishing, and any other clever form of social engineering.</div>
+<div class="ar-blk"><div class="lbl">🇸🇦 الترجمة</div>الوعي بالتهديدات البشرية:<br>
+• <strong>Spamming</strong> = البريد العشوائي غير المرغوب فيه<br>
+• <strong>Phishing</strong> = التصيد الاحتيالي (خداع المستخدم لسرقة بياناته)<br>
+• <strong>Social Engineering</strong> = الهندسة الاجتماعية (التلاعب النفسي بالإنسان)
+</div>
+<div class="ex-blk"><div class="lbl">💡 ملاحظة</div>الإنسان = أضعف حلقة في الأمن السيبراني. هذه الطبقة الأكثر خارجية (الأولى في مواجهة الهجمات).</div>
+</div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">6</span><span class="ct">Perimeter Security — أمن المحيط</span><span class="ca">▼</span></div>
+<div class="cb">
+<div class="en-blk"><div class="lbl">🇬🇧 النص الأصلي</div>Prevents suspicious activity from entering the network by protecting the gateway with firewalls, data encryption, anti-virus software.</div>
+<div class="ar-blk"><div class="lbl">🇸🇦 الترجمة</div>تمنع النشاط المشبوه من الدخول عبر:<br>
+• <strong>Firewalls</strong> = جدران الحماية<br>
+• <strong>Data Encryption</strong> = تشفير البيانات<br>
+• <strong>Anti-Virus Software</strong> = برامج مكافحة الفيروسات
+</div>
+</div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">5</span><span class="ct">Network Security — أمن الشبكة</span><span class="ca">▼</span></div>
+<div class="cb">
+<div class="en-blk"><div class="lbl">🇬🇧 النص الأصلي</div>We need to provide people with the minimum amount of "user privilege" possible for them to do their job and nothing more.</div>
+<div class="ar-blk"><div class="lbl">🇸🇦 الترجمة</div>منح الحد الأدنى من الصلاحيات اللازمة فقط.</div>
+<div class="ex-blk"><div class="lbl">💡 المبدأ</div><strong>Least Privilege</strong> = مبدأ الحد الأدنى من الصلاحيات — أعطِ كل مستخدم فقط ما يحتاجه لعمله.</div>
+</div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">4</span><span class="ct">Endpoint Security — أمن نقاط النهاية</span><span class="ca">▼</span></div>
+<div class="cb">
+<div class="ar-blk"><div class="lbl">🇸🇦 الترجمة</div>تحمي الاتصال بين الشبكة وأجهزتها عبر:<br>
+• <strong>Antivirus Software</strong> = برامج مكافحة الفيروسات<br>
+• <strong>Web Content Filtering</strong> = تصفية محتوى الويب<br>
+• <strong>Application Controls</strong> = التحكم في التطبيقات
+</div></div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">3</span><span class="ct">Application Security — أمن التطبيقات</span><span class="ca">▼</span></div>
+<div class="cb">
+<div class="ar-blk"><div class="lbl">🇸🇦 الترجمة</div>اختبار التطبيقات وإضافة ميزات لمنع <strong>Vulnerabilities</strong> (الثغرات) وإغلاقها بـ<strong>Patch</strong> (تصحيح). التحديث الدوري لعدم ترك أي نظام عرضة لـ<strong>Old Exploit</strong> (ثغرة قديمة).</div>
+</div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">2</span><span class="ct">Data Security — أمن البيانات</span><span class="ca">▼</span></div>
+<div class="cb">
+<div class="ar-blk"><div class="lbl">🇸🇦 الترجمة</div>• <strong>Backups</strong> = نسخ احتياطية موثوقة<br>
+• <strong>Encryption</strong> = تشفير البيانات<br>
+• <strong>Two-Factor Authentication (2FA)</strong> = المصادقة الثنائية
+</div></div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">1</span><span class="ct">Mission Critical Assets — الأصول الحيوية (الأكثر داخلية)</span><span class="ca">▼</span></div>
+<div class="cb">
+<div class="ar-blk"><div class="lbl">🇸🇦 الترجمة</div>أي <strong>Asset</strong> (أصل/مورد) لا تستطيع المنظمة العمل بدونه: أجهزة (<strong>Computers</strong>) + برامج (<strong>Software</strong>) + بيانات (<strong>Data</strong>). الطبقة الأعمق = الأكثر حمايةً.</div>
+</div></div>
+
+<hr>
+<div class="st">🌱 مصدر الثغرات — Origin of Vulnerabilities</div>
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">3</span><span class="ct">Design / Implementation / Configuration — المصادر الثلاثة</span><span class="ca">▼</span></div>
+<div class="cb">
+<div class="g3">
+<div class="mc" style="border-right:3px solid #ef4444">
+<div class="mt" style="color:#ef4444">1. Design Vulnerability</div>
+<div class="mb"><span class="tr">ثغرة التصميم</span>عيوب في التصميم الأصلي للنظام.<br><em>مثال: عدم استخدام HTTPS من البداية.</em></div>
+</div>
+<div class="mc" style="border-right:3px solid #f59e0b">
+<div class="mt" style="color:#f59e0b">2. Implementation Vulnerability</div>
+<div class="mb"><span class="tr">ثغرة التنفيذ / التطبيق</span>أخطاء أثناء تنفيذ البرنامج.<br><em>مثال: تثبيت البرنامج بطريقة خاطئة.</em></div>
+</div>
+<div class="mc" style="border-right:3px solid #7b5cf0">
+<div class="mt" style="color:#7b5cf0">3. Configuration Vulnerability</div>
+<div class="mb"><span class="tr">ثغرة الإعداد / الضبط</span>إعداد خاطئ أو استخدام الإعدادات الافتراضية.<br><em>مثال: عدم تغيير Default Password (كلمة المرور الافتراضية).</em></div>
+</div>
+</div>
+<div class="qs"><div class="qt">✏️ تطبيقات</div>
+<div class="q"><div class="qtx">عدم تغيير كلمة المرور الافتراضية (Default Password) مثال على: <span class="qtp">MCQ</span></div>
+<div class="opts"><button class="op" onclick="ans(this,false)">A. Design Vulnerability — ثغرة تصميم</button><button class="op" onclick="ans(this,false)">B. Implementation Vulnerability — ثغرة تنفيذ</button><button class="op" onclick="ans(this,true)">C. Configuration Vulnerability — ثغرة إعداد</button></div>
+<div class="ep"><span class="ek">✅ C — Configuration Vulnerability</span></div></div>
+<div class="q"><div class="qtx">عدم استخدام HTTPS في تصميم موقع ويب هو: <span class="qtp">MCQ</span></div>
+<div class="opts"><button class="op" onclick="ans(this,true)">A. Design Vulnerability — ثغرة تصميم</button><button class="op" onclick="ans(this,false)">B. Configuration Vulnerability — ثغرة إعداد</button><button class="op" onclick="ans(this,false)">C. Implementation Vulnerability — ثغرة تنفيذ</button></div>
+<div class="ep"><span class="ek">✅ A — Design Vulnerability</span></div></div>
+</div></div></div>
+</div>
+
+<!-- ===== L5-B ===== -->
+<div class="pg" id="pg-pt">
+<div class="st">🔍 Penetration Testing — اختبار الاختراق</div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">8</span><span class="ct">الخطوات الثماني كاملة مع الترجمة والأدوات</span><span class="ca op">▼</span></div>
+<div class="cb op"><div class="tl">
+<div class="ts" data-n="1">
+<h4>Planning & Preparation — التخطيط والتحضير</h4>
+<p>تحديد <strong>Scope</strong> (النطاق) + الأهداف + الإطار الزمني. الحصول على <strong>Legal Permissions</strong> (الأذونات القانونية) وتوقيع العقد مع <strong>Client</strong> (العميل).<br><em>أدوات: توقيع العقود — لا أدوات تقنية.</em></p>
+</div>
+<div class="ts" data-n="2">
+<h4>Reconnaissance — الاستطلاع</h4>
+<p>جمع سلبي للمعلومات المتاحة للعموم عن الهدف (<strong>Target</strong>): أسماء نطاقات (<strong>Domain Names</strong>)، عناوين IP، تقنيات، معلومات موظفين.<br>يُسمى <strong>OSINT = Open Source Intelligence = استخبارات المصادر المفتوحة</strong><br><em>أدوات: Google Dorking, Maltego, Recon-ng, TheHarvester, Metasploit</em></p>
+</div>
+<div class="ts" data-n="3">
+<h4>Scanning & Enumeration — الفحص والتعداد</h4>
+<p><strong>Network Scanning</strong> = فحص الشبكة لاكتشاف <strong>Active Hosts</strong> (المضيفين النشطين).<br><strong>Enumeration</strong> = تعداد <strong>Open Ports</strong> (المنافذ المفتوحة) والـ<strong>Services</strong> (الخدمات).<br><em>أدوات: Nmap, PowerView</em></p>
+</div>
+<div class="ts" data-n="4">
+<h4>Vulnerability Assessment — تقييم الثغرات</h4>
+<p>استخدام <strong>Automated Scanners</strong> (ماسحات آلية) لتحديد الثغرات المعروفة.<br><strong>Noisy (مزعج)</strong> = يُولِّد كميات كبيرة من حركة البيانات ويُكتشف بسهولة.<br><em>أدوات: Nessus, Metasploit, Greenbone</em></p>
+</div>
+<div class="ts" data-n="5">
+<h4>Exploitation — الاستغلال</h4>
+<p>بعد الوصول الأولي (<strong>Initial Access</strong>)، استغلال التطبيقات، الشبكة، أنظمة التشغيل، البشر، <strong>Misconfigurations</strong> (الإعدادات الخاطئة).<br><em>أدوات: sqlmap, John the Ripper, Burp Suite</em></p>
+</div>
+<div class="ts" data-n="6">
+<h4>Post-Exploitation — ما بعد الاستغلال</h4>
+<p>• <strong>Privilege Escalation</strong> = رفع الصلاحيات<br>• <strong>Persistence Mechanisms</strong> = آليات الاستمرارية للبقاء في النظام<br>• <strong>Leave no evidence</strong> = لا تترك أدلة — أزل الملفات والإعدادات.<br><em>أدوات: BloodHound, Responder, Seatbelt, Mimikatz</em></p>
+</div>
+<div class="ts" data-n="7">
+<h4>Reporting — التقرير</h4>
+<p>إنشاء تقرير يُفصِّل الثغرات المكتشفة وكيفية <strong>Remediation</strong> (معالجتها).<br><em>أدوات: Dradis, Faraday</em></p>
+</div>
+<div class="ts" data-n="8">
+<h4>Remediation & Follow-Up — المعالجة والمتابعة</h4>
+<p>مناقشة نتائج التقييم (<strong>Assessment Outcome</strong>) مع العميل. قد يشمل <strong>Re-testing</strong> = إعادة الاختبار.</p>
+</div>
+</div>
+<div class="wn-blk" style="margin-top:.8rem"><div class="lbl">⚡ NIST — 4 خطوات ملخصة</div>
+1. <strong>Plan</strong> (خطِّط) — تحديد النطاق والأهداف<br>
+2. <strong>Discover</strong> (اكتشف) — جمع المعلومات والاستطلاع<br>
+3. <strong>Attack</strong> (هاجم) — استغلال الثغرات<br>
+4. <strong>Report</strong> (أبلِّغ) — توثيق النتائج وتسليمها للعميل
+</div>
+<div class="qs"><div class="qt">✏️ تطبيقات</div>
+<div class="q"><div class="qtx">OSINT تُستخدم في مرحلة: <span class="qtp">MCQ</span></div>
+<div class="opts"><button class="op" onclick="ans(this,false)">A. Planning & Preparation — التخطيط</button><button class="op" onclick="ans(this,true)">B. Reconnaissance — الاستطلاع</button><button class="op" onclick="ans(this,false)">C. Exploitation — الاستغلال</button><button class="op" onclick="ans(this,false)">D. Reporting — التقرير</button></div>
+<div class="ep"><span class="ek">✅ B — Reconnaissance = الاستطلاع</span></div></div>
+<div class="q"><div class="qtx">في Post-Exploitation يجب إبقاء الأدلة. <span class="qtp">T/F</span></div>
+<div class="tfr"><button class="tf" onclick="tf(this,false)">✅ صحيح</button><button class="tf" onclick="tf(this,true)">❌ خطأ</button></div>
+<div class="ep"><span class="ew">❌ خطأ</span>"Leave no evidence" — أزل جميع الأدلة.</div></div>
+<div class="q"><div class="qtx">Nessus تُستخدم في مرحلة: <span class="qtp">MCQ</span></div>
+<div class="opts"><button class="op" onclick="ans(this,false)">A. Reconnaissance</button><button class="op" onclick="ans(this,false)">B. Scanning & Enumeration</button><button class="op" onclick="ans(this,true)">C. Vulnerability Assessment — تقييم الثغرات</button><button class="op" onclick="ans(this,false)">D. Post-Exploitation</button></div>
+<div class="ep"><span class="ek">✅ C — Vulnerability Assessment</span></div></div>
+</div></div></div>
+</div>
+
+<!-- ===== L5-C ===== -->
+<div class="pg" id="pg-5c">
+<div class="st">📊 15 خاصية للثغرات — Key Characteristics</div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">5</span><span class="ct">الخصائص 1–5</span><span class="ca op">▼</span></div>
+<div class="cb op"><div class="g2">
+<div class="mc" style="border-right:3px solid #ef4444">
+<div class="mt" style="color:#ef4444">1. Exploitability</div>
+<div class="mb"><span class="tr">قابلية الاستغلال</span>The ease with which a vulnerability can be exploited.<br><em>= مدى سهولة استغلال الثغرة.</em><br>أداة استغلال جاهزة للعموم = Exploitability عالية.</div>
+</div>
+<div class="mc" style="border-right:3px solid #f59e0b">
+<div class="mt" style="color:#f59e0b">2. Impact</div>
+<div class="mb"><span class="tr">الأثر / التأثير</span>Potential consequences if exploited.<br><em>= النتائج المحتملة إذا استُغلت الثغرة.</em><br><strong>CIA Triad:</strong> Confidentiality (سرية) + Integrity (سلامة) + Availability (توافر).</div>
+</div>
+<div class="mc" style="border-right:3px solid #10b981">
+<div class="mt" style="color:#10b981">3. Scope</div>
+<div class="mb"><span class="tr">النطاق</span>The extent of systems affected.<br><em>= نطاق الأنظمة المتأثرة.</em><br>ثغرة في مكتبة شائعة = Scope (نطاق) واسع.</div>
+</div>
+<div class="mc" style="border-right:3px solid #4f8ef7">
+<div class="mt" style="color:#4f8ef7">4. Attack Vector</div>
+<div class="mb"><span class="tr">ناقل الهجوم (مسار الهجوم)</span>The path by which an attacker exploits the vulnerability.<br><em>= المسار الذي يستخدمه المهاجم.</em><br>Network (شبكة), Physical (مادي), Social Engineering (هندسة اجتماعية).</div>
+</div>
+<div class="mc" style="border-right:3px solid #7b5cf0">
+<div class="mt" style="color:#7b5cf0">5. Complexity</div>
+<div class="mb"><span class="tr">التعقيد</span>The level of difficulty to exploit.<br><em>= مستوى صعوبة استغلال الثغرة.</em><br>ثغرة تتطلب معرفة متقدمة = Complexity عالٍ.</div>
+</div>
+</div></div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">5</span><span class="ct">الخصائص 6–10</span><span class="ca">▼</span></div>
+<div class="cb"><div class="g2">
+<div class="mc" style="border-right:3px solid #ef4444">
+<div class="mt" style="color:#ef4444">6. Privileges Required</div>
+<div class="mb"><span class="tr">الصلاحيات / الامتيازات المطلوبة</span>Levels: None (لا شيء) / Low-user (منخفضة) / High-admin (عالية-مدير).<br><strong>⚠️ None = الأخطر!</strong> أي شخص يستطيع الاستغلال.</div>
+</div>
+<div class="mc" style="border-right:3px solid #f59e0b">
+<div class="mt" style="color:#f59e0b">7. Detection Difficulty</div>
+<div class="mb"><span class="tr">صعوبة الاكتشاف</span>How easily the vulnerability can be detected.<br><em>= مدى صعوبة اكتشاف الثغرة.</em><br>ثغرة في ميزة نادرة الاستخدام = أصعب اكتشافاً.</div>
+</div>
+<div class="mc" style="border-right:3px solid #10b981">
+<div class="mt" style="color:#10b981">8. Remediation Difficulty</div>
+<div class="mb"><span class="tr">صعوبة المعالجة / الإصلاح</span>The effort required to fix the vulnerability.<br><em>= الجهد اللازم لإصلاح الثغرة.</em><br>ثغرة تتطلب إعادة تصميم كامل = صعبة المعالجة.</div>
+</div>
+<div class="mc" style="border-right:3px solid #4f8ef7">
+<div class="mt" style="color:#4f8ef7">9. Dependency</div>
+<div class="mb"><span class="tr">الاعتمادية</span>Relationship between the vulnerability and other components.<br><em>= علاقة الثغرة بمكونات أخرى.</em><br>ثغرة في Third-party Library (مكتبة خارجية).</div>
+</div>
+<div class="mc" style="border-right:3px solid #7b5cf0">
+<div class="mt" style="color:#7b5cf0">10. Time Sensitivity</div>
+<div class="mb"><span class="tr">الحساسية الزمنية (الإلحاح)</span>The urgency to address the vulnerability.<br><em>= مدى إلحاحية التعامل مع الثغرة.</em><br><strong>Zero-Day</strong> (ثغرة يوم الصفر) مع استغلال نشط = اهتمام فوري!</div>
+</div>
+</div></div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">5</span><span class="ct">الخصائص 11–15</span><span class="ca">▼</span></div>
+<div class="cb"><div class="g2">
+<div class="mc" style="border-right:3px solid #ef4444">
+<div class="mt" style="color:#ef4444">11. Persistence</div>
+<div class="mb"><span class="tr">الاستمرارية (البقاء في النظام)</span>Whether the vulnerability allows attacker to maintain access.<br><em>= هل تسمح للمهاجم بالبقاء؟</em><br>ثغرة تسمح بتثبيت Malware (برمجية خبيثة) = Persistence.</div>
+</div>
+<div class="mc" style="border-right:3px solid #06b6d4">
+<div class="mt" style="color:#06b6d4">12. Environmental Factors</div>
+<div class="mb"><span class="tr">العوامل البيئية (السياق المحيط)</span>The context in which the vulnerability exists.<br><em>= البيئة والإعداد المحيط بالثغرة.</em><br>نظام مكشوف على الإنترنت أخطر من نظام Isolated (معزول).</div>
+</div>
+<div class="mc" style="border-right:3px solid #10b981">
+<div class="mt" style="color:#10b981">13. Public Awareness</div>
+<div class="mb"><span class="tr">الوعي العام (مدى المعرفة بالثغرة)</span>The level of knowledge the vulnerability has received.<br><em>= مستوى الانتباه الذي نالته الثغرة.</em><br>ثغرة أُعلنت في مؤتمر أمني كبير = Public Awareness عالٍ.</div>
+</div>
+<div class="mc" style="border-right:3px solid #f59e0b">
+<div class="mt" style="color:#f59e0b">14. Patch Availability</div>
+<div class="mb"><span class="tr">توفر التصحيح / الإصلاح</span>Whether a fix or patch is available.<br><em>= هل يتوفر Patch (تصحيح) للثغرة؟</em><br>ثغرة بلا Patch = أخطر من ثغرة لها Patch.</div>
+</div>
+<div class="mc" style="border-right:3px solid #7b5cf0">
+<div class="mt" style="color:#7b5cf0">15. Attack Surface</div>
+<div class="mb"><span class="tr">سطح الهجوم (مساحة التعرض)</span>The exposure of the vulnerability to potential attackers.<br><em>= مدى تعرض الثغرة للمهاجمين.</em><br>تطبيق ويب مكشوف = Attack Surface أكبر من نظام داخلي.</div>
+</div>
+</div>
+<div class="qs"><div class="qt">✏️ تطبيقات</div>
+<div class="q"><div class="qtx">Zero-Day مع active exploitation يرتبط بخاصية: <span class="qtp">MCQ</span></div>
+<div class="opts"><button class="op" onclick="ans(this,false)">A. Persistence — الاستمرارية</button><button class="op" onclick="ans(this,true)">B. Time Sensitivity — الحساسية الزمنية</button><button class="op" onclick="ans(this,false)">C. Public Awareness — الوعي العام</button><button class="op" onclick="ans(this,false)">D. Attack Surface — سطح الهجوم</button></div>
+<div class="ep"><span class="ek">✅ B — Time Sensitivity</span></div></div>
+<div class="q"><div class="qtx">Privileges Required = None (لا صلاحيات) هي الأقل خطورة. <span class="qtp">T/F</span></div>
+<div class="tfr"><button class="tf" onclick="tf(this,false)">✅ صحيح</button><button class="tf" onclick="tf(this,true)">❌ خطأ</button></div>
+<div class="ep"><span class="ew">❌ خطأ</span>None = الأخطر! لأن أي شخص يستطيع الاستغلال بدون صلاحيات.</div></div>
+</div></div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">!</span><span class="ct">CVSS Risk Score + Risk Matrix — درجة المخاطرة</span><span class="ca">▼</span></div>
+<div class="cb">
+<div class="ar-blk"><div class="lbl">🇸🇦 شرح</div>
+<strong>CVSS = Common Vulnerability Scoring System = نظام تسجيل درجة الثغرة</strong><br>
+يستخدم الخصائص السابقة لتحديد <strong>Risk Score</strong> (درجة المخاطرة) لكل ثغرة.
+</div>
+<div class="ex-blk"><div class="lbl">💡 Risk Matrix (Impact × Likelihood)</div>
+🔴 <strong>Critical — Unacceptable (9)</strong> = خطر حرج غير مقبول — يُعالج فوراً<br>
+🟠 <strong>High Risk (7-8)</strong> = خطر عالٍ — يُعالج بسرعة (Promptly)<br>
+🟡 <strong>Medium Risk (4-6)</strong> = خطر متوسط — يُعالج حسب الوقت<br>
+🟢 <strong>Low Risk — Acceptable (1-3)</strong> = خطر منخفض — عند توفر الموارد
+</div>
+</div></div>
+</div>
+
+<!-- ===== L5-D ===== -->
+<div class="pg" id="pg-5d">
+<div class="st">🗂️ تصنيف الثغرات — 5 طرق</div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">1</span><span class="ct">By Domain — حسب النطاق</span><span class="ca op">▼</span></div>
+<div class="cb op"><div class="g2">
+<div class="mc" style="border-right:3px solid #4f8ef7">
+<div class="mt" style="color:#4f8ef7">Software Vulnerabilities</div>
+<div class="mb"><span class="tr">ثغرات البرمجيات</span>• <strong>Buffer Overflows</strong> = فيض المخزن المؤقت<br>• <strong>SQL Injection</strong> = حقن SQL<br>• <strong>XSS</strong> = Cross-site Scripting = برمجة عبر المواقع<br>• <strong>Insecure Deserialization</strong> = إلغاء تسلسل غير آمن</div>
+</div>
+<div class="mc" style="border-right:3px solid #f59e0b">
+<div class="mt" style="color:#f59e0b">Hardware Vulnerabilities</div>
+<div class="mb"><span class="tr">ثغرات الأجهزة المادية</span>• <strong>Firmware Vulnerabilities</strong> = ثغرات البرامج الثابتة المدمجة في الجهاز<br>• <strong>Side-channel Attacks</strong> = هجمات القناة الجانبية</div>
+</div>
+<div class="mc" style="border-right:3px solid #10b981">
+<div class="mt" style="color:#10b981">Network Vulnerabilities</div>
+<div class="mb"><span class="tr">ثغرات الشبكة</span>• <strong>Weak Encryption</strong> = تشفير ضعيف<br>• <strong>Misconfigured Firewalls</strong> = جدران حماية مُعدَّة خطأ<br>• <strong>Insecure Network Protocols</strong> = بروتوكولات شبكة غير آمنة</div>
+</div>
+<div class="mc" style="border-right:3px solid #7b5cf0">
+<div class="mt" style="color:#7b5cf0">Human / Organizational Vulnerabilities</div>
+<div class="mb"><span class="tr">ثغرات بشرية / تنظيمية</span>• <strong>Social Engineering</strong> = الهندسة الاجتماعية<br>• <strong>Lack of Security Awareness</strong> = ضعف الوعي الأمني<br>• <strong>Poor Password Management</strong> = إدارة كلمات مرور سيئة</div>
+</div>
+</div></div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">2</span><span class="ct">By Type of Flaw — حسب نوع العيب</span><span class="ca">▼</span></div>
+<div class="cb"><div class="g2">
+<div class="mc"><div class="mt" style="color:#ef4444">Input Validation Vulnerabilities<span class="tr">ثغرات التحقق من المدخلات</span></div><div class="mb">الفشل في التحقق من <strong>User Input</strong> (مدخلات المستخدم) → SQL Injection + XSS.</div></div>
+<div class="mc"><div class="mt" style="color:#f59e0b">Authentication & Authorization Vulnerabilities<span class="tr">ثغرات المصادقة والتفويض</span></div><div class="mb">• <strong>Authentication</strong> = المصادقة: كلمات مرور ضعيفة<br>• <strong>Authorization</strong> = التفويض: Missing Access Controls (غياب ضوابط الوصول)</div></div>
+<div class="mc"><div class="mt" style="color:#10b981">Memory Management Vulnerabilities<span class="tr">ثغرات إدارة الذاكرة</span></div><div class="mb">• <strong>Buffer Overflows</strong> = فيض المخزن المؤقت<br>• <strong>Use-after-free errors</strong> = أخطاء استخدام الذاكرة بعد تحريرها</div></div>
+<div class="mc"><div class="mt" style="color:#4f8ef7">Configuration Vulnerabilities<span class="tr">ثغرات الإعداد</span></div><div class="mb">• <strong>Default Passwords</strong> = كلمات مرور افتراضية<br>• <strong>Open Ports</strong> = منافذ مفتوحة غير ضرورية</div></div>
+</div></div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">3</span><span class="ct">By Severity — حسب الخطورة</span><span class="ca">▼</span></div>
+<div class="cb"><div class="g2">
+<div class="mc" style="border-right:4px solid #ef4444"><div class="mt" style="color:#ef4444">🔴 Critical — حرج</div><div class="mb">خطر بالغ. تُعالج <strong>فوراً</strong> (Immediately).</div></div>
+<div class="mc" style="border-right:4px solid #f97316"><div class="mt" style="color:#f97316">🟠 High — عالٍ</div><div class="mb">أضرار كبيرة. تُعالج <strong>بسرعة</strong> (Promptly).</div></div>
+<div class="mc" style="border-right:4px solid #eab308"><div class="mt" style="color:#eab308">🟡 Medium — متوسط</div><div class="mb">خطر معتدل. تُعالج <strong>حسب الوقت</strong> (As time permits).</div></div>
+<div class="mc" style="border-right:4px solid #22c55e"><div class="mt" style="color:#22c55e">🟢 Low — منخفض</div><div class="mb">خطر ضئيل. تُعالج <strong>عند توفر الموارد</strong> (When resources available).</div></div>
+</div></div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">5</span><span class="ct">أنظمة التصنيف المعيارية — CVE / CWE / CVSS</span><span class="ca">▼</span></div>
+<div class="cb">
+<div class="g3">
+<div class="mc" style="border-right:3px solid #4f8ef7"><div class="mt" style="color:#4f8ef7">CVE</div><div class="mb"><strong>Common Vulnerabilities and Exposures</strong><span class="tr">قاموس الثغرات والمخاطر الشائعة</span>قاموس (<strong>Dictionary</strong>) للثغرات المعروفة للعموم.</div></div>
+<div class="mc" style="border-right:3px solid #7b5cf0"><div class="mt" style="color:#7b5cf0">CWE</div><div class="mb"><strong>Common Weakness Enumeration</strong><span class="tr">تعداد نقاط الضعف الشائعة</span>نظام تصنيف (<strong>Category System</strong>) لنقاط ضعف البرامج والأجهزة.</div></div>
+<div class="mc" style="border-right:3px solid #10b981"><div class="mt" style="color:#10b981">CVSS</div><div class="mb"><strong>Common Vulnerability Scoring System</strong><span class="tr">نظام تسجيل درجة الثغرة</span>طريقة معيارية لتقييم الخطورة وتحديد <strong>Risk Score</strong> (درجة المخاطرة).</div></div>
+</div>
+<div class="qs"><div class="qt">✏️ تطبيقات</div>
+<div class="q"><div class="qtx">CVE هو نظام لتسجيل درجة خطورة الثغرات. <span class="qtp">T/F</span></div>
+<div class="tfr"><button class="tf" onclick="tf(this,false)">✅ صحيح</button><button class="tf" onclick="tf(this,true)">❌ خطأ</button></div>
+<div class="ep"><span class="ew">❌ خطأ</span>CVE = قاموس. نظام تسجيل الخطورة = CVSS.</div></div>
+<div class="q"><div class="qtx">Use-after-free errors مثال على: <span class="qtp">MCQ</span></div>
+<div class="opts"><button class="op" onclick="ans(this,false)">A. Input Validation — التحقق من المدخلات</button><button class="op" onclick="ans(this,true)">B. Memory Management — إدارة الذاكرة</button><button class="op" onclick="ans(this,false)">C. Configuration — الإعداد</button></div>
+<div class="ep"><span class="ek">✅ B — Memory Management</span></div></div>
+</div></div></div>
+</div>
+
+<!-- ===== L6-A ===== -->
+<div class="pg" id="pg-6a">
+<div class="st">🛡️ استراتيجيات التخفيف — المحاضرة 6</div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">!</span><span class="ct">⚠️ Mitigation مقابل Remediation — الفرق الأهم</span><span class="ca op">▼</span></div>
+<div class="cb op">
+<div class="g2">
+<div class="mc" style="border-right:3px solid #f59e0b"><div class="mt" style="color:#f59e0b">Mitigation — التخفيف</div><div class="mb">تقليل المخاطر <strong>مؤقتاً</strong> حتى يُوجد حل دائم.<br>= Temporary (مؤقت)</div></div>
+<div class="mc" style="border-right:3px solid #10b981"><div class="mt" style="color:#10b981">Remediation — المعالجة</div><div class="mb">تصحيح الثغرة فعلياً بالوصول إلى <strong>Root Cause</strong> (السبب الجذري).<br>= Permanent (دائم) — الهدف النهائي دائماً!</div></div>
+</div>
+<div class="ex-blk"><div class="lbl">💡 متى Mitigation بدلاً من Remediation؟</div>
+• لا يتوفر <strong>Patch</strong> (تصحيح) فوري<br>
+• الثغرة ليست خطيرة كفاية<br>
+• لا توجد موارد أو كوادر كافية (<strong>No Bandwidth</strong>)<br>
+• <strong>Compatibility Issues</strong> (مشاكل توافق تقني) تمنع الإصلاح
+</div>
+</div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">1</span><span class="ct">Patch Management — إدارة التصحيحات</span><span class="ca">▼</span></div>
+<div class="cb">
+<div class="ar-blk"><div class="lbl">🇸🇦 التعريف</div>عملية الحصول على (<strong>Acquiring</strong>) واختبار (<strong>Testing</strong>) وتثبيت (<strong>Installing</strong>) تحديثات البرامج (<strong>Patches</strong> = تصحيحات) لإصلاح الثغرات وتحسين استقرار النظام (<strong>Stability</strong>).</div>
+<div class="ex-blk"><div class="lbl">💡 Best Practices — أفضل الممارسات</div>
+• إنشاء <strong>Policy</strong> (سياسة) لإدارة التصحيحات<br>
+• الاحتفاظ بـ<strong>Inventory</strong> (جرد) لجميع البرامج<br>
+• تحديد الأولويات (<strong>Prioritize</strong>) بناءً على المخاطر<br>
+• اختبار في بيئة <strong>Non-production</strong> (غير إنتاجية)<br>
+• أتمتة (<strong>Automate</strong>) العملية<br>
+• وجود <strong>Rollback Plan</strong> (خطة تراجع)<br>
+<strong>أدوات:</strong> WSUS, SCCM
+</div>
+</div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">2</span><span class="ct">Security Configuration — الإعداد الأمني</span><span class="ca">▼</span></div>
+<div class="cb">
+<div class="ar-blk"><div class="lbl">🇸🇦 التعريف</div><strong>Hardening</strong> = تقوية الأنظمة بتطبيق إعدادات آمنة لتقليل <strong>Attack Surface</strong> (سطح الهجوم).</div>
+<div class="ex-blk"><div class="lbl">💡 أفضل الممارسات</div>
+• اتباع <strong>CIS Benchmarks</strong> (معايير أمنية مرجعية)<br>
+• تعطيل (<strong>Disable</strong>) الخدمات والـ<strong>Ports</strong> (منافذ) غير الضرورية<br>
+• تطبيق <strong>Least Privilege</strong> (الحد الأدنى من الصلاحيات)<br>
+• فرض <strong>Strong Password Policies</strong> (سياسات كلمات مرور قوية)<br>
+• تطبيق <strong>Logging and Auditing</strong> (التسجيل والمراجعة)<br>
+<strong>أدوات:</strong> Group Policy, أدوات إدارة الإعداد
+</div>
+</div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">3</span><span class="ct">Access Control — التحكم في الوصول</span><span class="ca">▼</span></div>
+<div class="cb">
+<div class="g3">
+<div class="mc" style="border-right:3px solid #4f8ef7"><div class="mt" style="color:#4f8ef7">Identification<span class="tr">التعريف</span></div><div class="mb">Verifying identity = التحقق من هوية المستخدم (من أنت؟)</div></div>
+<div class="mc" style="border-right:3px solid #10b981"><div class="mt" style="color:#10b981">Authentication<span class="tr">المصادقة</span></div><div class="mb">Confirming identity = تأكيد وإثبات الهوية (هل أنت فعلاً من تدّعي؟)</div></div>
+<div class="mc" style="border-right:3px solid #7b5cf0"><div class="mt" style="color:#7b5cf0">Authorization<span class="tr">التفويض / التصريح</span></div><div class="mb">What actions are allowed = تحديد الإجراءات المسموح بها</div></div>
+</div>
+<div class="ex-blk" style="margin-top:.7rem"><div class="lbl">💡 الآليات (Mechanisms)</div>
+• <strong>Passwords</strong> = كلمات المرور<br>
+• <strong>MFA</strong> = Multi-factor Authentication = المصادقة متعددة العوامل<br>
+• <strong>Biometrics</strong> = القياسات الحيوية (بصمة، عين)<br>
+• <strong>ACLs</strong> = Access Control Lists = قوائم التحكم في الوصول<br>
+• <strong>RBAC</strong> = Role-Based Access Control = التحكم بناءً على الدور<br>
+• <strong>Least Privilege</strong> = الحد الأدنى من الصلاحيات
+</div>
+</div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">4</span><span class="ct">Network Security — أمن الشبكة (كاستراتيجية تخفيف)</span><span class="ca">▼</span></div>
+<div class="cb">
+<div class="ex-blk"><div class="lbl">💡 المكونات + أفضل الممارسات</div>
+<strong>Key Components (المكونات الرئيسية):</strong><br>
+• <strong>Firewalls</strong> = جدران الحماية<br>
+• <strong>IDS/IPS</strong> = Intrusion Detection/Prevention Systems = أنظمة كشف/منع الاختراق<br>
+• <strong>VPNs</strong> = Virtual Private Networks = الشبكات الافتراضية الخاصة<br>
+• <strong>Network Segmentation</strong> = تقسيم الشبكة إلى أجزاء معزولة<br>
+• <strong>Wireless Security</strong> = أمن الشبكة اللاسلكية<br>
+• <strong>Network Monitoring</strong> = مراقبة الشبكة<br><br>
+<strong>Best Practices:</strong><br>
+• تحديث <strong>Firmware</strong> (البرامج الثابتة) بانتظام<br>
+• استخدام <strong>Strong Encryption</strong> (تشفير قوي)<br>
+• مراقبة <strong>Network Traffic</strong> (حركة الشبكة)
+</div>
+</div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">5</span><span class="ct">Data Security — أمن البيانات (كاستراتيجية تخفيف)</span><span class="ca">▼</span></div>
+<div class="cb">
+<div class="ex-blk"><div class="lbl">💡 الإجراءات + اللوائح</div>
+• <strong>Data Classification</strong> = تصنيف البيانات حسب الحساسية<br>
+• <strong>Encryption</strong> = التشفير: at rest (في التخزين) و in transit (أثناء النقل)<br>
+• <strong>DLP</strong> = Data Loss Prevention = منع فقدان البيانات<br>
+• <strong>Data Backup and Recovery</strong> = النسخ الاحتياطي والاسترداد<br>
+• <strong>Secure Data Disposal</strong> = التخلص الآمن من البيانات<br><br>
+<strong>Relevant Regulations (اللوائح ذات الصلة):</strong><br>
+• <strong>GDPR</strong> = لائحة حماية البيانات الأوروبية<br>
+• <strong>HIPAA</strong> = لائحة خصوصية المعلومات الصحية (أمريكية)<br>
+• <strong>PCI DSS</strong> = معيار أمن بيانات بطاقات الدفع
+</div>
+</div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">6</span><span class="ct">Security Awareness Training — التدريب على الوعي الأمني</span><span class="ca">▼</span></div>
+<div class="cb">
+<div class="ar-blk"><div class="lbl">🇸🇦 التعريف</div>تثقيف الموظفين والمستخدمين حول مخاطر الأمن وأفضل الممارسات لتعزيز ثقافة أمنية واعية (Security-conscious Culture).</div>
+<div class="ex-blk"><div class="lbl">💡 المواضيع وأفضل الممارسات</div>
+<strong>Key Topics:</strong> Phishing & Social Engineering (تصيد وهندسة اجتماعية) | Password Security (أمن كلمات المرور) | Malware Awareness (وعي بالبرمجيات الخبيثة) | Incident Reporting (إبلاغ عن الحوادث)<br><br>
+<strong>Best Practices:</strong><br>
+• Regular and Ongoing Training = تدريب منتظم ومستمر<br>
+• Tailored Training for Different Roles = تدريب مخصص لكل دور<br>
+• <strong>Simulated Phishing Attacks</strong> = هجمات تصيد محاكاة لاختبار الموظفين
+</div>
+</div></div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">7</span><span class="ct">Incident Response — الاستجابة للحوادث — 6 مراحل</span><span class="ca">▼</span></div>
+<div class="cb">
+<div class="tl">
+<div class="ts" data-n="1"><h4>Preparation — التحضير</h4><p>الحالة الطبيعية (Steady State) — الاستعداد قبل وقوع أي حادثة.</p></div>
+<div class="ts" data-n="2"><h4>Identification — التحديد</h4><p>Declare an Incident = الإعلان عن الحادثة وتحديد ما حدث.</p></div>
+<div class="ts" data-n="3"><h4>Containment — الاحتواء</h4><p>Start Cleanup = بدء التنظيف — احتواء الضرر ومنع انتشاره.</p></div>
+<div class="ts" data-n="4"><h4>Eradication — الاستئصال</h4><p>Finish Cleanup = إنهاء التنظيف — إزالة السبب الجذري للحادثة.</p></div>
+<div class="ts" data-n="5"><h4>Recovery — الاسترداد</h4><p>Back to Production = العودة للإنتاج — استعادة الأنظمة.</p></div>
+<div class="ts" data-n="6"><h4>Lessons Learned — الدروس المستفادة</h4><p>IR Completed = اكتمال الاستجابة — ماذا تعلمنا؟ كيف نتحسن؟</p></div>
+</div>
+<div class="qs"><div class="qt">✏️ تطبيقات</div>
+<div class="q"><div class="qtx">مرحلة Containment (الاحتواء) تأتي بعد: <span class="qtp">MCQ</span></div>
+<div class="opts"><button class="op" onclick="ans(this,false)">A. Preparation — التحضير</button><button class="op" onclick="ans(this,true)">B. Identification — التحديد</button><button class="op" onclick="ans(this,false)">C. Eradication — الاستئصال</button></div>
+<div class="ep"><span class="ek">✅ B — Identification</span>الترتيب: Preparation → Identification → Containment → Eradication → Recovery → Lessons Learned</div></div>
+</div></div></div>
+</div>
+
+<!-- ===== L6-B ===== -->
+<div class="pg" id="pg-6b">
+<div class="st">🏰 Defense in Depth — الدفاع المتعمق</div>
+
+<div class="cc"><div class="ch" onclick="tg(this)"><span class="cn">6</span><span class="ct">الطبقات الست للدفاع المتعمق</span><span class="ca op">▼</span></div>
+<div class="cb op">
+<div class="en-blk"><div class="lbl">🇬🇧 التعريف</div>Implementing multiple security controls at different layers to provide redundancy and increase resilience. Benefit: If one layer fails, others are in place to provide protection.</div>
+<div class="ar-blk"><div class="lbl">🇸🇦 الترجمة</div>تطبيق ضوابط أمنية متعددة على طبقات مختلفة لتوفير <strong>Redundancy</strong> (التكرار/الاحتياطية) وزيادة <strong>Resilience</strong> (المرونة والصمود).<br><strong>الفائدة:</strong> إذا فشلت طبقة واحدة، توجد طبقات أخرى للحماية.</div>
+<div class="tl" style="margin-top:.8rem">
+<div class="ts" data-n="1"><h4>Physical Security — الأمن المادي</h4><p>حماية البنية التحتية: أقفال (<strong>Locks</strong>)، كاميرات مراقبة (<strong>CCTV</strong>)، حراسة (<strong>Guards</strong>).</p></div>
+<div class="ts" data-n="2"><h4>Perimeter Security — أمن المحيط</h4><p>حماية حدود الشبكة: <strong>Firewalls</strong> (جدران الحماية)، <strong>DMZ</strong> (المنطقة منزوعة السلاح).</p></div>
+<div class="ts" data-n="3"><h4>Network Security — أمن الشبكة</h4><p><strong>Network Segmentation</strong> (تقسيم الشبكة) يمنع انتشار الهجوم <strong>Laterally</strong> (أفقياً).</p></div>
+<div class="ts" data-n="4"><h4>Host Security — أمن الجهاز المضيف</h4><p><strong>Antivirus</strong> + <strong>Host-based IDS</strong> + <strong>Patch Management</strong> + <strong>Encryption</strong> (تشفير).</p></div>
+<div class="ts" data-n="5"><h4>Application Security — أمن التطبيقات</h4><p><strong>WAF</strong> = Web Application Firewall (جدار حماية تطبيقات الويب) + Secure Coding + Input Validation.</p></div>
+<div class="ts" data-n="6"><h4>Data Security — أمن البيانات (الأكثر داخلية)</h4><p>Encryption at rest/in transit (تشفير عند التخزين والنقل) + <strong>DLP</strong> (منع فقدان البيانات).</p></div>
+</div>
+<div class="qs"><div class="qt">✏️ تطبيقات</div>
+<div class="q"><div class="qtx">كم عدد طبقات Defense in Depth (الدفاع المتعمق)؟ <span class="qtp">MCQ</span></div>
+<div class="opts"><button class="op" onclick="ans(this,false)">A. 4</button><button class="op" onclick="ans(this,false)">B. 5</button><button class="op" onclick="ans(this,true)">C. 6</button><button class="op" onclick="ans(this,false)">D. 7</button></div>
+<div class="ep"><span class="ek">✅ C — 6 طبقات</span>Physical → Perimeter → Network → Host → Application → Data</div></div>
+<div class="q"><div class="qtx">Vulnerability Mitigation (تخفيف الثغرات) هي عملية مستمرة (Ongoing). <span class="qtp">T/F</span></div>
+<div class="tfr"><button class="tf" onclick="tf(this,true)">✅ صحيح</button><button class="tf" onclick="tf(this,false)">❌ خطأ</button></div>
+<div class="ep"><span class="ek">✅ صحيح</span>"Vulnerability mitigation is an ongoing process" — المحاضرة.</div></div>
+</div></div></div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div class="pg" id="pg-qz">
+<div class="scb">
+<div><div class="sn" id="sc-num">0/20</div><div class="sl">إجابات صحيحة</div></div>
+<div class="pw"><div class="pb2" id="sc-bar" style="width:0%"></div></div>
+<button class="sr" onclick="resetQ()">🔄 إعادة</button>
+</div>
+<div class="st">✅ أسئلة شاملة — 20 سؤال</div>
+<div class="qs"><div class="qt">🔵 L5-A + L5-B</div>
+<div class="q"><div class="qtx">Q1. ما أعمق طبقة في نموذج الأمن السيبراني؟ <span class="qtp">MCQ</span></div><div class="opts"><button class="op" onclick="qa(this,false)">A. Data Security — أمن البيانات</button><button class="op" onclick="qa(this,true)">B. Mission Critical Assets — الأصول الحيوية</button><button class="op" onclick="qa(this,false)">C. Application Security — أمن التطبيقات</button></div><div class="ep"><span class="ek">✅ B</span></div></div>
+<div class="q"><div class="qtx">Q2. Phishing (التصيد) يُعالج في طبقة Human Layer. <span class="qtp">T/F</span></div><div class="tfr"><button class="tf" onclick="qa(this,true)">✅ صحيح</button><button class="tf" onclick="qa(this,false)">❌ خطأ</button></div><div class="ep"><span class="ek">✅ صحيح</span></div></div>
+<div class="q"><div class="qtx">Q3. OSINT (استخبارات المصادر المفتوحة) تُستخدم في مرحلة: <span class="qtp">MCQ</span></div><div class="opts"><button class="op" onclick="qa(this,false)">A. Planning — التخطيط</button><button class="op" onclick="qa(this,true)">B. Reconnaissance — الاستطلاع</button><button class="op" onclick="qa(this,false)">C. Exploitation — الاستغلال</button></div><div class="ep"><span class="ek">✅ B — Reconnaissance = الاستطلاع</span></div></div>
+<div class="q"><div class="qtx">Q4. Vulnerability Assessment (تقييم الثغرات) تُعرف بأنها Noisy (مزعجة). <span class="qtp">T/F</span></div><div class="tfr"><button class="tf" onclick="qa(this,true)">✅ صحيح</button><button class="tf" onclick="qa(this,false)">❌ خطأ</button></div><div class="ep"><span class="ek">✅ صحيح</span>تُولِّد كميات كبيرة من حركة البيانات.</div></div>
+<div class="q"><div class="qtx">Q5. في Post-Exploitation يجب إبقاء الأدلة. <span class="qtp">T/F</span></div><div class="tfr"><button class="tf" onclick="qa(this,false)">✅ صحيح</button><button class="tf" onclick="qa(this,true)">❌ خطأ</button></div><div class="ep"><span class="ew">❌ خطأ</span>"Leave no evidence"</div></div>
+</div>
+
+<div class="qs" style="margin-top:.8rem"><div class="qt">🟣 L5-C + L5-D</div>
+<div class="q"><div class="qtx">Q6. Privileges Required = None (لا صلاحيات) هي الأخطر. <span class="qtp">T/F</span></div><div class="tfr"><button class="tf" onclick="qa(this,true)">✅ صحيح</button><button class="tf" onclick="qa(this,false)">❌ خطأ</button></div><div class="ep"><span class="ek">✅ صحيح</span>أي شخص يستطيع الاستغلال.</div></div>
+<div class="q"><div class="qtx">Q7. Zero-Day مع استغلال نشط يرتبط بخاصية: <span class="qtp">MCQ</span></div><div class="opts"><button class="op" onclick="qa(this,false)">A. Persistence — الاستمرارية</button><button class="op" onclick="qa(this,true)">B. Time Sensitivity — الحساسية الزمنية</button><button class="op" onclick="qa(this,false)">C. Public Awareness — الوعي العام</button></div><div class="ep"><span class="ek">✅ B — Time Sensitivity</span></div></div>
+<div class="q"><div class="qtx">Q8. CVE هو نظام تسجيل درجة خطورة الثغرات. <span class="qtp">T/F</span></div><div class="tfr"><button class="tf" onclick="qa(this,false)">✅ صحيح</button><button class="tf" onclick="qa(this,true)">❌ خطأ</button></div><div class="ep"><span class="ew">❌ خطأ</span>CVE = قاموس. CVSS = تسجيل الخطورة.</div></div>
+<div class="q"><div class="qtx">Q9. SQL Injection يُصنَّف ضمن: <span class="qtp">MCQ</span></div><div class="opts"><button class="op" onclick="qa(this,false)">A. Hardware Vulnerabilities — ثغرات الأجهزة</button><button class="op" onclick="qa(this,true)">B. Software Vulnerabilities — ثغرات البرمجيات</button><button class="op" onclick="qa(this,false)">C. Network Vulnerabilities — ثغرات الشبكة</button></div><div class="ep"><span class="ek">✅ B — Software Vulnerabilities</span></div></div>
+<div class="q"><div class="qtx">Q10. ثغرة Critical (حرج) تُعالج عند توفر الموارد. <span class="qtp">T/F</span></div><div class="tfr"><button class="tf" onclick="qa(this,false)">✅ صحيح</button><button class="tf" onclick="qa(this,true)">❌ خطأ</button></div><div class="ep"><span class="ew">❌ خطأ</span>Critical تُعالج فوراً. "عند توفر الموارد" = Low.</div></div>
+</div>
+
+<div class="qs" style="margin-top:.8rem"><div class="qt">🟢 L6-A + L6-B</div>
+<div class="q"><div class="qtx">Q11. Mitigation (التخفيف) هو حل دائم للثغرات. <span class="qtp">T/F</span></div><div class="tfr"><button class="tf" onclick="qa(this,false)">✅ صحيح</button><button class="tf" onclick="qa(this,true)">❌ خطأ</button></div><div class="ep"><span class="ew">❌ خطأ</span>Mitigation = مؤقت. Remediation = الدائم.</div></div>
+<div class="q"><div class="qtx">Q12. Authentication (المصادقة) = تحديد ما يُسمح بفعله. <span class="qtp">T/F</span></div><div class="tfr"><button class="tf" onclick="qa(this,false)">✅ صحيح</button><button class="tf" onclick="qa(this,true)">❌ خطأ</button></div><div class="ep"><span class="ew">❌ خطأ</span>Authentication = تأكيد الهوية. ما يُسمح بفعله = Authorization.</div></div>
+<div class="q"><div class="qtx">Q13. المرحلة الأخيرة في Incident Response: <span class="qtp">MCQ</span></div><div class="opts"><button class="op" onclick="qa(this,false)">A. Recovery — الاسترداد</button><button class="op" onclick="qa(this,true)">B. Lessons Learned — الدروس المستفادة</button><button class="op" onclick="qa(this,false)">C. Eradication — الاستئصال</button></div><div class="ep"><span class="ek">✅ B — Lessons Learned</span></div></div>
+<div class="q"><div class="qtx">Q14. كم عدد طبقات Defense in Depth؟ <span class="qtp">MCQ</span></div><div class="opts"><button class="op" onclick="qa(this,false)">A. 4</button><button class="op" onclick="qa(this,false)">B. 5</button><button class="op" onclick="qa(this,true)">C. 6</button><button class="op" onclick="qa(this,false)">D. 7</button></div><div class="ep"><span class="ek">✅ C — 6 طبقات</span></div></div>
+<div class="q"><div class="qtx">Q15. Vulnerability Mitigation عملية مستمرة (Ongoing). <span class="qtp">T/F</span></div><div class="tfr"><button class="tf" onclick="qa(this,true)">✅ صحيح</button><button class="tf" onclick="qa(this,false)">❌ خطأ</button></div><div class="ep"><span class="ek">✅ صحيح</span></div></div>
+<div class="q"><div class="qtx">Q16. GDPR و HIPAA لوائح تتعلق بـ: <span class="qtp">MCQ</span></div><div class="opts"><button class="op" onclick="qa(this,false)">A. Network Security — أمن الشبكة</button><button class="op" onclick="qa(this,true)">B. Data Security — أمن البيانات</button><button class="op" onclick="qa(this,false)">C. Patch Management — إدارة التصحيحات</button></div><div class="ep"><span class="ek">✅ B — Data Security</span></div></div>
+<div class="q"><div class="qtx">Q17. IDS/IPS تنتمي لاستراتيجية: <span class="qtp">MCQ</span></div><div class="opts"><button class="op" onclick="qa(this,false)">A. Access Control — التحكم في الوصول</button><button class="op" onclick="qa(this,true)">B. Network Security — أمن الشبكة</button><button class="op" onclick="qa(this,false)">C. Data Security — أمن البيانات</button></div><div class="ep"><span class="ek">✅ B — Network Security</span></div></div>
+<div class="q"><div class="qtx">Q18. CIS Benchmarks تُستخدم في استراتيجية: <span class="qtp">MCQ</span></div><div class="opts"><button class="op" onclick="qa(this,false)">A. Patch Management — إدارة التصحيحات</button><button class="op" onclick="qa(this,true)">B. Security Configuration — الإعداد الأمني</button><button class="op" onclick="qa(this,false)">C. Incident Response — الاستجابة للحوادث</button></div><div class="ep"><span class="ek">✅ B — Security Configuration</span></div></div>
+<div class="q"><div class="qtx">Q19. WAF (Web Application Firewall) تنتمي لطبقة: <span class="qtp">MCQ</span></div><div class="opts"><button class="op" onclick="qa(this,false)">A. Host Security — أمن الجهاز</button><button class="op" onclick="qa(this,true)">B. Application Security — أمن التطبيقات</button><button class="op" onclick="qa(this,false)">C. Perimeter Security — أمن المحيط</button></div><div class="ep"><span class="ek">✅ B — Application Security</span></div></div>
+<div class="q"><div class="qtx">Q20. RBAC = Role-Based Access Control = التحكم في الوصول بناءً على الدور. <span class="qtp">T/F</span></div><div class="tfr"><button class="tf" onclick="qa(this,true)">✅ صحيح</button><button class="tf" onclick="qa(this,false)">❌ خطأ</button></div><div class="ep"><span class="ek">✅ صحيح</span></div></div>
+</div>
+</div>
+
+</div>
+
+<script>
+function sp(id,btn){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(t=>t.classList.remove('on'));
+  document.getElementById('pg-'+id).classList.add('on');
+  if(btn)btn.classList.add('on');
+  window.scrollTo(0,0);
+}
+function tg(h){
+  const cb=h.nextElementSibling;
+  const arr=h.querySelector('.ca');
+  cb.classList.toggle('op');
+  arr.classList.toggle('op');
+}
+function ans(btn,correct){
+  const opts=btn.parentElement;
+  if(opts.querySelector('.ok,.ng'))return;
+  opts.querySelectorAll('button').forEach(b=>b.disabled=true);
+  btn.classList.add(correct?'ok':'ng');
+  if(!correct)opts.querySelectorAll('button').forEach(b=>{if(b.onclick.toString().includes(',true)'))b.classList.add('ok');});
+  btn.closest('.q').querySelector('.ep').classList.add('sh');
+}
+function tf(btn,correct){
+  const row=btn.parentElement;
+  if(row.querySelector('.ok,.ng'))return;
+  row.querySelectorAll('button').forEach(b=>b.disabled=true);
+  btn.classList.add(correct?'ok':'ng');
+  if(!correct)row.querySelectorAll('button').forEach(b=>{if(b.onclick.toString().includes(',true)'))b.classList.add('ok');});
+  btn.closest('.q').querySelector('.ep').classList.add('sh');
+}
+let score=0;
+function qa(btn,correct){
+  const q=btn.closest('.q');
+  if(q.dataset.done)return;
+  q.dataset.done='1';
+  const isOpts=btn.parentElement.classList.contains('opts');
+  if(isOpts){
+    btn.parentElement.querySelectorAll('button').forEach(b=>b.disabled=true);
+    btn.classList.add(correct?'ok':'ng');
+    if(!correct)btn.parentElement.querySelectorAll('button').forEach(b=>{if(b.onclick.toString().includes(',true)'))b.classList.add('ok');});
+  } else {
+    btn.parentElement.querySelectorAll('button').forEach(b=>b.disabled=true);
+    btn.classList.add(correct?'ok':'ng');
+    if(!correct)btn.parentElement.querySelectorAll('button').forEach(b=>{if(b.onclick.toString().includes(',true)'))b.classList.add('ok');});
+  }
+  if(correct)score++;
+  q.querySelector('.ep').classList.add('sh');
+  document.getElementById('sc-num').textContent=score+'/20';
+  document.getElementById('sc-bar').style.width=Math.round(score/20*100)+'%';
+}
+function resetQ(){
+  score=0;
+  document.querySelectorAll('#pg-qz .q').forEach(q=>{
+    delete q.dataset.done;
+    q.querySelectorAll('button').forEach(b=>{b.disabled=false;b.classList.remove('ok','ng');});
+    const ep=q.querySelector('.ep');
+    if(ep)ep.classList.remove('sh');
+  });
+  document.getElementById('sc-num').textContent='0/20';
+  document.getElementById('sc-bar').style.width='0%';
+}
+</script>
+</div>
